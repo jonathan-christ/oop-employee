@@ -25,7 +25,10 @@ public class CommissionEmployee extends Employee{
         this.totalSales = sales;
     }
     
-    public CommissionEmployee(int id, String name, int yearHire, int monthHire, int dayHire, int yearBirth, int monthBirth, int dayBirth, double sales){
+    public CommissionEmployee(int id, String name, 
+            int yearHire, int monthHire, int dayHire, 
+            int yearBirth, int monthBirth, int dayBirth, double sales
+    ){
         super(id, name, yearHire, monthHire, dayHire, yearBirth, monthBirth, dayBirth);
         this.totalSales = sales;
     }

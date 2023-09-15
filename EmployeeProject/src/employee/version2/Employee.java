@@ -33,7 +33,10 @@ public class Employee {
         this.empBirthDate = empBirthDate;
     }
     
-    public Employee(int id, String name, int yearHire, int monthHire, int dayHire, int yearBirth, int monthBirth, int dayBirth){
+    public Employee(int id, String name, 
+            int yearHire, int monthHire, int dayHire, 
+            int yearBirth, int monthBirth, int dayBirth
+    ){
         this.empID = id;
         this.empName = name;
         this.empBirthDate = new Date(yearBirth, monthBirth, dayBirth); 

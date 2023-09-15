@@ -22,19 +22,31 @@ public class HourlyEmployee extends Employee{
         this.ratePerHour = 0;
     }
     
-    public HourlyEmployee(int id, String name, Date hireDate, Date birthDate, float totalHours, float rateHour){
+    public HourlyEmployee(int id, String name, 
+            Date hireDate, Date birthDate, 
+            float totalHours, float rateHour
+    ){
         super(id, name, hireDate, birthDate);
         this.totalHoursWorked  = totalHours;
         this.ratePerHour = rateHour;
     }
     
-    public HourlyEmployee(int id, String name, int yearHire, int monthHire, int dayHire, int yearBirth, int monthBirth, int dayBirth, float totalHours, float rateHour){
+    public HourlyEmployee(
+            int id, String name, 
+            int yearHire, int monthHire, int dayHire, 
+            int yearBirth, int monthBirth, int dayBirth, 
+            float totalHours, float rateHour
+    ){
         super(id, name, yearHire, monthHire, dayHire, yearBirth, monthBirth, dayBirth);
         this.totalHoursWorked = totalHours;
         this.ratePerHour = rateHour;
     }
     
-    public HourlyEmployee(int id, String name, String hireDate, String birthDate, float totalHours, float rateHour){
+    public HourlyEmployee(
+            int id, String name, 
+            String hireDate, String birthDate, 
+            float totalHours, float rateHour
+    ){
         super(id, name, hireDate, birthDate);
         this.totalHoursWorked = totalHours;
         this.ratePerHour = rateHour;

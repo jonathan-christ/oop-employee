@@ -22,19 +22,32 @@ public class PieceWorkerEmployee extends Employee{
         this.ratePerPiece = 0;
     }
     
-    public PieceWorkerEmployee(int id, String name, Date hireDate, Date birthDate, int totalPieces, float ratePiece){
+    public PieceWorkerEmployee(
+            int id, String name,
+            Date hireDate, Date birthDate, 
+            int totalPieces, float ratePiece
+    ){
         super(id, name, hireDate, birthDate);
         this.totalPiecesFinished  = totalPieces;
         this.ratePerPiece = ratePiece;
     }
     
-    public PieceWorkerEmployee(int id, String name, int yearHire, int monthHire, int dayHire, int yearBirth, int monthBirth, int dayBirth, int totalPieces, float ratePiece){
+    public PieceWorkerEmployee(
+            int id, String name, 
+            int yearHire, int monthHire, int dayHire, 
+            int yearBirth, int monthBirth, int dayBirth, 
+            int totalPieces, float ratePiece
+    ){
         super(id, name, yearHire, monthHire, dayHire, yearBirth, monthBirth, dayBirth);
         this.totalPiecesFinished = totalPieces;
         this.ratePerPiece = ratePiece;
     }
     
-    public PieceWorkerEmployee(int id, String name, String hireDate, String birthDate, int totalPieces, float ratePiece){
+    public PieceWorkerEmployee(
+            int id, String name, 
+            String hireDate, String birthDate,
+            int totalPieces, float ratePiece
+    ){
         super(id, name, hireDate, birthDate);
         this.totalPiecesFinished = totalPieces;
         this.ratePerPiece = ratePiece;

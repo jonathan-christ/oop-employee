@@ -83,12 +83,7 @@ public class Name {
 // METHODS
     @Override
     public String toString() {
-        return 
-            "\tFirst name='"+this.first+"',\n"+
-            "\tLast name='"+this.last+"',\n"+ 
-            "\tMiddle name='"+this.middle+"',\n"+
-            "\tPrefix='"+this.prefix+"',\n"+
-            "\tSuffix='"+this.suffix+"',\n"; //To change body of generated methods, choose Tools | Templates.
+        return String.format("%s %s %s %s %s", prefix, first, middle, last, suffix); //To change body of generated methods, choose Tools | Templates.
     }
     
     
