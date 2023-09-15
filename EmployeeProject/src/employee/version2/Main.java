@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package employee.version1;
+package employee.version2;
 
 /**
  *
  * @author User
  */
 public class Main {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+    public static void main(String[] args){
         HourlyEmployee hourly = new HourlyEmployee(0,"Bryan","8/9/2022","09/02/2002", 45f, 10f);//(1, "Sir Hourly", "9/20/2023", "3/19/2003", 107, 100);
         PieceWorkerEmployee piece = new PieceWorkerEmployee(0,"Bryan","8/9/2022","09/02/2002", 500, 10f);//(1, "Magnus Carlsen", "2/2/2023", "7/30/2002", 107, 5);
         CommissionEmployee comm = new CommissionEmployee(0,"Bryan","8/9/2022","09/02/2002", 107000);//(1, "Conditioner", "5/13/2023", "1/24/2005", 107000);
@@ -26,8 +22,5 @@ public class Main {
         piece.displayInfo();
         comm.displayInfo();
         bpc.displayInfo();
-
-        
     }
-    
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package employee.version1;
+package employee.version2;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,44 +12,35 @@ import java.util.Date;
  *
  * @author User
  */
-public class BasePlusCommissionEmployee {
+public class Employee {
     private int empID;
     private String empName;
     private Date empDateHired;
     private Date empBirthDate;
-    
-    private double totalSales;
-    private double baseSalary;
-    
+
 //    CONSTRUCTORS
-    BasePlusCommissionEmployee(){
-        this.empID = 0;
+    public Employee(){
+        this.empID = -1;
         this.empName = "";
         this.empDateHired = new Date();
         this.empBirthDate = new Date();
-        this.totalSales = 0;
-        this.baseSalary = 0;
     }
     
-    BasePlusCommissionEmployee(int id, String name, Date hireDate, Date birthDate, double sales, double baseSalary){
-        this.empID = id;
-        this.empName = name;
-        this.empDateHired = hireDate;
-        this.empBirthDate = birthDate;
-        this.totalSales = sales;
-        this.baseSalary = baseSalary;
+    public Employee(int empID, String empName, Date empDateHired, Date empBirthDate) {
+        this.empID = empID;
+        this.empName = empName;
+        this.empDateHired = empDateHired;
+        this.empBirthDate = empBirthDate;
     }
     
-    BasePlusCommissionEmployee(int id, String name, int yearHire, int monthHire, int dayHire, int yearBirth, int monthBirth, int dayBirth, double sales, double baseSalary){
+    public Employee(int id, String name, int yearHire, int monthHire, int dayHire, int yearBirth, int monthBirth, int dayBirth){
         this.empID = id;
         this.empName = name;
         this.empBirthDate = new Date(yearBirth, monthBirth, dayBirth); 
         this.empDateHired = new Date(yearHire, monthHire, dayHire);
-        this.totalSales = sales;
-        this.baseSalary = baseSalary;
     }
     
-    BasePlusCommissionEmployee(int id, String name, String hireDate, String birthDate, double sales, double baseSalary){
+    public Employee(int id, String name,String hireDate, String birthDate){
         this.empID = id;
         this.empName = name;
         try{
@@ -65,11 +56,9 @@ public class BasePlusCommissionEmployee {
             System.out.println("Error hireDate\n\n");
             this.empDateHired = new Date();
         }
-        this.totalSales = sales;
-        this.baseSalary = baseSalary;
-    }
-    
-//    ACCESSORS AND MUTATORS
+     }
+
+//    SETTERS AND GETTERS
     public int getEmpID() {
         return empID;
     }
@@ -101,41 +90,8 @@ public class BasePlusCommissionEmployee {
     public void setEmpBirthDate(Date empBirthDate) {
         this.empBirthDate = empBirthDate;
     }
-
-    public double getTotalSales() {
-        return totalSales;
-    }
-
-    public void setTotalSales(double totalSales) {
-        this.totalSales = totalSales;
-    }
-
-    public double getBaseSalary() {
-        return baseSalary;
-    }
-
-    public void setBaseSalary(double baseSalary) {
-        this.baseSalary = baseSalary;
-    }
     
-//    METHODS
-    public double computeSalary(){
-        final double[] salesPercent = {0.05, 0.2, 0.3, 0.5};
-        double salary;
-        int salaryIdx = 0;
-        
-        if(totalSales>= 50000 && totalSales<100000){
-            salaryIdx = 1;
-        }else if(totalSales>=100000 && totalSales<500000){
-            salaryIdx = 2;
-        }else if(totalSales>=500000){
-            salaryIdx = 3;
-        }
-        
-        salary = salesPercent[salaryIdx]*totalSales + baseSalary;
-        return salary;
-    }
-    
+//    USER-DEFINED FUNCTIONS
     public void displayInfo(){
         SimpleDateFormat hire = new SimpleDateFormat("MM/dd/yyyy");
         String sHire = hire.format(this.empDateHired);
@@ -144,11 +100,9 @@ public class BasePlusCommissionEmployee {
         String sBday = bday.format(this.empBirthDate);
 
         System.out.print(String.format(
-                "[Employee %d's Information]\n[-]Employee type: Base plus Commission Employee\n[-]Name %s\n[-]Hire Date: %s\n[-]Birth Date: %s\n"
-                        + "[-]Total Sales: %.2f\n[-]Base Salary: %.2f\n[-]Total Salary: %.2f\n\n",
+                "[Employee %d's Information]\n[-]Name: %s\n[-]Hire Date: %s\n[-]Birth Date: %s\n",
                 this.empID, this.empName,  
-                sHire, sBday, this.baseSalary,
-                this.totalSales, computeSalary()));
+                sHire, sBday));
     }
     
     @Override
@@ -159,8 +113,8 @@ public class BasePlusCommissionEmployee {
         SimpleDateFormat bday = new SimpleDateFormat("MM/dd/yyyy");
         String sBday = bday.format(this.empBirthDate);
         
-        return "BasePlusCommission Instance{\n\ttempID=" + empID + ",\n\tempName=" + empName + 
+        return "HourlyEmployee Instance{\n\tempID=" + empID + ",\n\tempName=" + empName + 
                 ",\n\tempDateHired=" + sHire + ",\n\tempBirthDate=" + 
-                sBday + ",\n\tbaseSalary="+baseSalary+",\n\ttotalSales=" + totalSales +"\n}\n";
+                sBday;
     }
 }

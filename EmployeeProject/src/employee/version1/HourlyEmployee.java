@@ -17,6 +17,7 @@ public class HourlyEmployee {
     private String empName;
     private Date empDateHired;
     private Date empBirthDate;
+    
     private float totalHoursWorked;
     private float ratePerHour;
     

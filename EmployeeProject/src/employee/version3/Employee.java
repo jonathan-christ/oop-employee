@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package employee.version1;
-
+package employee.version3;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,41 +11,61 @@ import java.util.Date;
  *
  * @author User
  */
-public class CommissionEmployee {
+public class Employee {
     private int empID;
-    private String empName;
+    private Name empName;
     private Date empDateHired;
     private Date empBirthDate;
-    
-    private double totalSales;
-    
-    CommissionEmployee(){
-        this.empID = 0;
-        this.empName = "";
+
+//    CONSTRUCTORS
+    public Employee(){
+        this.empID = -1;
+        this.empName = new Name();
         this.empDateHired = new Date();
         this.empBirthDate = new Date();
-        this.totalSales = 0;
     }
     
-    CommissionEmployee(int id, String name, Date hireDate, Date birthDate, double sales){
-        this.empID = id;
-        this.empName = name;
-        this.empDateHired = hireDate;
-        this.empBirthDate = birthDate;
-        this.totalSales = sales;
+    public Employee(int empID, Name empName, Date empDateHired, Date empBirthDate) {
+        this.empID = empID;
+        this.empName = empName;
+        this.empDateHired = empDateHired;
+        this.empBirthDate = empBirthDate;
     }
     
-    CommissionEmployee(int id, String name, int yearHire, int monthHire, int dayHire, int yearBirth, int monthBirth, int dayBirth, double sales){
+    public Employee(int empID, 
+            String first, String last, String middle, String prefix, String suffix, 
+            Date empDateHired, Date empBirthDate
+    ){
+        this(empID, 
+                new Name(first, last, middle, prefix, suffix), 
+                empDateHired, empBirthDate
+        );
+    }
+    
+    public Employee(int id, Name empName, int yearHire, int monthHire, int dayHire, int yearBirth, int monthBirth, int dayBirth){
         this.empID = id;
-        this.empName = name;
+        this.empName = empName;
         this.empBirthDate = new Date(yearBirth, monthBirth, dayBirth); 
         this.empDateHired = new Date(yearHire, monthHire, dayHire);
-        this.totalSales = sales;
     }
     
-    CommissionEmployee(int id, String name, String hireDate, String birthDate, double sales){
+    public Employee(
+            int id, 
+            String first, String last, String middle, String prefix, String suffix, 
+            int yearHire, int monthHire, int dayHire, 
+            int yearBirth, int monthBirth, int dayBirth
+    ){
+        
+        this(id, 
+                new Name(first, last, middle, prefix, suffix), 
+                yearHire, monthHire, dayHire, 
+                yearBirth, monthBirth, dayBirth
+        );
+    }
+    
+    public Employee(int id, Name empName, String hireDate, String birthDate){
         this.empID = id;
-        this.empName = name;
+        this.empName = empName;
         try{
             this.empBirthDate = new SimpleDateFormat("MM/dd/yyyy").parse(birthDate); 
         } catch(Exception e){
@@ -60,11 +79,16 @@ public class CommissionEmployee {
             System.out.println("Error hireDate\n\n");
             this.empDateHired = new Date();
         }
-        this.totalSales = sales;
-    }
+     }
     
-//    ACCESSORS AND MUTATORS
+        public Employee(int id, 
+                String first, String last, String middle, String prefix, String suffix, 
+                String hireDate, String birthDate
+        ){
+        this(id, new Name(first, last, middle, prefix, suffix),hireDate, birthDate);
+     }
 
+//    SETTERS AND GETTERS
     public int getEmpID() {
         return empID;
     }
@@ -73,11 +97,11 @@ public class CommissionEmployee {
         this.empID = empID;
     }
 
-    public String getEmpName() {
+    public Name getEmpName() {
         return empName;
     }
 
-    public void setEmpName(String empName) {
+    public void setEmpName(Name empName) {
         this.empName = empName;
     }
 
@@ -96,33 +120,8 @@ public class CommissionEmployee {
     public void setEmpBirthDate(Date empBirthDate) {
         this.empBirthDate = empBirthDate;
     }
-
-    public double getTotalSales() {
-        return totalSales;
-    }
-
-    public void setTotalSales(double totalSales) {
-        this.totalSales = totalSales;
-    }
     
-// METHODS
-    public double computeSalary(){
-        final double[] salesPercent = {0.05, 0.2, 0.3, 0.5};
-        double salary;
-        int salaryIdx = 0;
-        
-        if(totalSales>= 50000 && totalSales<100000){
-            salaryIdx = 1;
-        }else if(totalSales>=100000 && totalSales<500000){
-            salaryIdx = 2;
-        }else if(totalSales>=500000){
-            salaryIdx = 3;
-        }
-        
-        salary = salesPercent[salaryIdx]*totalSales;
-        return salary;
-    }
-    
+//    USER-DEFINED FUNCTIONS
     public void displayInfo(){
         SimpleDateFormat hire = new SimpleDateFormat("MM/dd/yyyy");
         String sHire = hire.format(this.empDateHired);
@@ -131,11 +130,9 @@ public class CommissionEmployee {
         String sBday = bday.format(this.empBirthDate);
 
         System.out.print(String.format(
-                "[Employee %d's Information]\n[-]Employee type: Commission Employee\n[-]Name %s\n[-]Hire Date: %s\n[-]Birth Date: %s\n"
-                        + "[-]Total Sales: %.2f\n[-]Total Salary: %.2f\n\n",
+                "[Employee %d's Information]\n[-]Name: %s\n[-]Hire Date: %s\n[-]Birth Date: %s\n",
                 this.empID, this.empName,  
-                sHire, sBday, 
-                this.totalSales, computeSalary()));
+                sHire, sBday));
     }
     
     @Override
@@ -146,9 +143,8 @@ public class CommissionEmployee {
         SimpleDateFormat bday = new SimpleDateFormat("MM/dd/yyyy");
         String sBday = bday.format(this.empBirthDate);
         
-        return "CommissionEmployee Instance{\n\ttempID=" + empID + ",\n\tempName=" + empName + 
+        return "HourlyEmployee Instance{\n\tempID=" + empID + ",\n\tempName=" + empName + 
                 ",\n\tempDateHired=" + sHire + ",\n\tempBirthDate=" + 
-                sBday + ",\n\ttotalSales=" + totalSales +"\n}\n";
+                sBday;
     }
-    
 }
