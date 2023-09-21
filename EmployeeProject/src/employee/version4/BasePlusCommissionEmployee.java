@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package employee.version3;
-
+package employee.version4;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -101,15 +100,13 @@ public class BasePlusCommissionEmployee extends CommissionEmployee {
         String sBday = bday.format(this.getEmpBirthDate());
 
         System.out.print(String.format(
-                """
-                    [Employee %d's Information]
-                    [-]Name %s
-                    [-]Hire Date: %s
-                    [-]Birth Date: %s
-                    [-]Total Sales: %.2f
-                    [-]Base Salary: %.2f
-                    [-]Total Salary: %.2f                                       
-                    """,
+                "[Employee %d's Information]\n"
+                + "[-]Name %s\n"
+                + "[-]Hire Date: %s\n"
+                + "[-]Birth Date: %s\n"
+                + "[-]Total Sales: %.2f\n"
+                + "[-]Base Salary: %.2f\n"
+                + "[-]Total Salary: %.2f\n\n",
                 this.getEmpID(), this.getEmpName(),
                 sHire, sBday, this.baseSalary,
                 this.getTotalSales(), computeSalary()));

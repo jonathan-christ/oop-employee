@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package employee.version3;
-
+package employee.version4;
 /**
  *
  * @author User
@@ -83,7 +82,8 @@ public class Name {
 // METHODS
     @Override
     public String toString() {
-        return String.format("%s %s %s %s %s", prefix, first, middle, last, suffix); //To change body of generated methods, choose Tools | Templates.
+        return String.format("%s %s %s %s %s", 
+                prefix, first, middle, last, suffix); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
