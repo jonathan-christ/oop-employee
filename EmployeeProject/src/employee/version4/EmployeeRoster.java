@@ -4,13 +4,18 @@ public class EmployeeRoster {
 
     private Employee[] Employees;
     private int count;
-    private final int max = 10;
+    private int max = 10;
     private final String strFormat = "| %-6s | %-50s | %-50s | %-10s |";
 
     //CONSTRUCTOR
     public EmployeeRoster() {
         Employees = new Employee[max];
         count = 0;
+    }
+    
+    public EmployeeRoster(int max){
+        this();
+        this.max = max;
     }
 
     //ACCESSORS (NO MUTATORS)
@@ -25,15 +30,20 @@ public class EmployeeRoster {
     //METHODS
     public void addEmployee(Employee ... input) {
         for(Employee e : input){
+            //CHECK IF ID IS THERE ALREADY
             Employees[count] = e;
             count++;
         }
     }
 
     public Employee removeEmployee(int id) {
-        for (Employee x : Employees) {
-            if (x.getEmpID() == id) {
-                return x;
+        for(int x=0; x<count; x++){
+            if(id == Employees[x].getEmpID()){
+                this.count--;
+                for(int y=x; y<count; y++){
+                    Employees[y] = Employees[y+1];
+                }
+                x--;
             }
         }
 
@@ -56,8 +66,9 @@ public class EmployeeRoster {
         int arrIdx;
         arrIdx = 0;
 
-        for (Employee x : Employees) {
-            if (x != null && x.getEmpName().toString().toLowerCase().contains(keyword.toLowerCase())) {
+        for (int i=0; i<count; i++) {
+            Employee x = Employees[i];
+            if (x.getEmpName().toString().toLowerCase().contains(keyword.toLowerCase())) {
                 searchedArr[arrIdx++] = x;
             }
         }
@@ -66,11 +77,16 @@ public class EmployeeRoster {
     }
 
     public void displayAllEmployees() {
+        if(count == 0){
+            System.out.println("Employee Roster is Empty!\n");
+            return;
+        }
         System.out.println(String.format(strFormat,
                 "ID", "Name", "Type", "Salary"));
         System.out.println(String.format(strFormat,
                 "","","","",""));
-        for (Employee x : Employees) {
+        for (int i=0; i<count; i++) {
+            Employee x=Employees[i];
             if (x != null) {
                 System.out.println(String.format(strFormat,
                         "" + x.getEmpID(),
@@ -79,6 +95,7 @@ public class EmployeeRoster {
                         x.computeSalary()));
             }
         }
+        System.out.println("");
     }
 
     public void displayAllEmployees(Employee[] EmpArr) {
@@ -93,6 +110,7 @@ public class EmployeeRoster {
                         x.computeSalary()));
             }
         }
+        System.out.println("");
     }
 
 }
