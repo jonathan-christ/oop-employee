@@ -89,17 +89,14 @@ public class EmployeeRoster {
     }
 
     private boolean isInstance(Employee y, String type) {
-        boolean ret = false;
+        boolean ret;
         type = type.toUpperCase();
         switch (type) {
-            case "HE":
-                ret = (y instanceof HourlyEmployee);
-            case "PW":
-                ret = (y instanceof PieceWorkerEmployee);
-            case "CE":
-                ret = (y instanceof CommissionEmployee);
-            case "BPC":
-                ret = (y instanceof BasePlusCommissionEmployee);
+            case "HE" -> ret = (y instanceof HourlyEmployee);
+            case "PW" -> ret = (y instanceof PieceWorkerEmployee);
+            case "CE" -> ret = (y instanceof CommissionEmployee);
+            case "BPC" -> ret = (y instanceof BasePlusCommissionEmployee);
+            default -> ret = false;
         }
 
         return ret;

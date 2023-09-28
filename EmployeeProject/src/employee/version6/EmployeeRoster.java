@@ -24,17 +24,14 @@ public class EmployeeRoster {
 
     //METHODS
         private boolean isInstance(Employee y, String type) {
-        boolean ret = false;
+        boolean ret;
         type = type.toUpperCase();
         switch (type) {
-            case "HE":
-                ret = (y instanceof HourlyEmployee);
-            case "PW":
-                ret = (y instanceof PieceWorkerEmployee);
-            case "CE":
-                ret = (y instanceof CommissionEmployee);
-            case "BPC":
-                ret = (y instanceof BasePlusCommissionEmployee);
+            case "HE" -> ret = (y instanceof HourlyEmployee);
+            case "PW" -> ret = (y instanceof PieceWorkerEmployee);
+            case "CE" -> ret = (y instanceof CommissionEmployee);
+            case "BPC" -> ret = (y instanceof BasePlusCommissionEmployee);
+            default -> ret = false;
         }
 
         return ret;
@@ -77,6 +74,7 @@ public class EmployeeRoster {
     
     public void displayEmployeeType(String type){
         ArrayList<Employee> searchedList = new ArrayList<>();
+        System.out.println("Displaying Employees of Type " + type.toUpperCase());
         for(Employee x: Employees){
             if(isInstance(x, type)){
                 searchedList.add(x);
