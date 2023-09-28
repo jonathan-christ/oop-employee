@@ -30,7 +30,8 @@ public class Main {
         er.displayAllEmployees();
         er.searchEmployee("Middle");
         er.updateEmployee(3, new Name("Rey Laurence", "Gikapoy", "Middle"));
-        er.searchEmployee("nothing");
+        er.searchEmployee("gikapoy");
         er.displayAllEmployees();
+        er.displayEmployeeType("bpc");
     }
 }

@@ -60,23 +60,71 @@ public class EmployeeRoster {
 
         return false;
     }
-    
-    private double getSalary(Employee x){
+
+    public int countEmpType(String type) {
+        int empCount = 0;
+        for (int x = 0; x < count; x++) {
+            Employee y = Employees[x];
+            if (isInstance(y, type)) {
+                empCount++;
+            }
+        }
+        return empCount;
+    }
+
+    public void displayEmployeeType(String type) {
+        int length = this.countEmpType(type), idx = 0;
+        if (length == 0) {
+            return;
+        }
+        Employee[] searchArr = new Employee[length];
+        System.out.println("Displaying Employees of Type " + type.toUpperCase());
+        for (int y = 0; y < count; y++) {
+            Employee x = Employees[y];
+            if (isInstance(x, type)) {
+                searchArr[idx++] = x;
+            }
+        }
+        this.displayAllEmployees(searchArr, length);
+    }
+
+    private boolean isInstance(Employee y, String type) {
+        boolean ret = false;
+        type = type.toUpperCase();
+        switch (type) {
+            case "HE":
+                ret = (y instanceof HourlyEmployee);
+            case "PW":
+                ret = (y instanceof PieceWorkerEmployee);
+            case "CE":
+                ret = (y instanceof CommissionEmployee);
+            case "BPC":
+                ret = (y instanceof BasePlusCommissionEmployee);
+        }
+
+        return ret;
+    }
+
+    private double getSalary(Employee x) {
         double salary;
         switch (x) {
-            case HourlyEmployee he -> salary = he.computeSalary();
-            case PieceWorkerEmployee pwe -> salary = pwe.computeSalary();
-            case CommissionEmployee ce -> salary = ce.computeSalary();
-            default -> salary = 0;
+            case HourlyEmployee he ->
+                salary = he.computeSalary();
+            case PieceWorkerEmployee pwe ->
+                salary = pwe.computeSalary();
+            case CommissionEmployee ce ->
+                salary = ce.computeSalary();
+            default ->
+                salary = 0;
         }
-        
+
         return salary;
     }
 
     public void searchEmployee(String keyword) {
         Employee[] searchedArr = new Employee[this.count];
         int arrIdx;
-        
+
         arrIdx = 0;
 
         for (int i = 0; i < count; i++) {
@@ -85,40 +133,26 @@ public class EmployeeRoster {
                 searchedArr[arrIdx++] = x;
             }
         }
-        System.out.println("Matches that contain keyword: `"+keyword+"`");
-        displayAllEmployees(searchedArr);
+        System.out.println("Matches that contain keyword: `" + keyword + "`");
+        displayAllEmployees(searchedArr, arrIdx);
     }
 
     public void displayAllEmployees() {
+        this.displayAllEmployees(Employees, count);
+    }
+
+    public void displayAllEmployees(Employee[] EmpArr, int length) {
         double salary;
-        if (count == 0) {
+        if (length == 0) {
             System.out.println("Employee Roster is Empty!\n");
             return;
         }
+        this.printLine();
         System.out.println(String.format(strFormat,
                 "ID", "Name", "Type", "Salary"));
-        System.out.println(String.format(strFormat,
-                "", "", "", "", ""));
-        for (int i = 0; i < count; i++) {
-            Employee x = Employees[i];
-            salary = getSalary(x);
-            
-            if (x != null) {
-                System.out.println(String.format(strFormat,
-                        "" + x.getEmpID(),
-                        x.getEmpName().toString(),
-                        x.getClass().getSimpleName(),
-                        salary));
-            }
-        }
-        System.out.println("");
-    }
-
-    public void displayAllEmployees(Employee[] EmpArr) {
-        double salary;
-        System.out.println(String.format(strFormat,
-                "ID", "Name", "Type", "Salary"));
-        for (Employee x : EmpArr) {
+        this.printLine();
+        for (int y = 0; y < length; y++) {
+            Employee x = Employees[y];
             if (x != null) {
                 salary = getSalary(x);
                 System.out.println(String.format(strFormat,
@@ -127,8 +161,16 @@ public class EmployeeRoster {
                         x.getClass().getSimpleName(),
                         salary));
             }
+
         }
+        this.printLine();
         System.out.println("");
+    }
+
+    private void printLine() {
+        System.out.print(String.format("%-63s%-64s\n",
+                " -------------------------------------------------------------",
+                "-----------------------------------------------------------------"));
     }
 
 }

@@ -32,5 +32,6 @@ public class Main {
         er.updateEmployee(3, new Name("Rey Laurence", "Gikapoy", "Middle"));
         er.searchEmployee("gikapoy");
         er.displayAllEmployees();
+        er.displayEmployeeType("bpc");
     }
 }

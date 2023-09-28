@@ -18,7 +18,28 @@ public class EmployeeRoster {
         return Employees;
     }
 
+    public String getStrFormat() {
+        return strFormat;
+    }
+
     //METHODS
+        private boolean isInstance(Employee y, String type) {
+        boolean ret = false;
+        type = type.toUpperCase();
+        switch (type) {
+            case "HE":
+                ret = (y instanceof HourlyEmployee);
+            case "PW":
+                ret = (y instanceof PieceWorkerEmployee);
+            case "CE":
+                ret = (y instanceof CommissionEmployee);
+            case "BPC":
+                ret = (y instanceof BasePlusCommissionEmployee);
+        }
+
+        return ret;
+    }
+    
     public void addEmployee(Employee... input) {
         Employees.addAll(Arrays.asList(input));
     }
@@ -26,6 +47,7 @@ public class EmployeeRoster {
     public Employee removeEmployee(int id) {
         for (Employee x : Employees) {
             if (x != null && x.getEmpID() == id) {
+                Employees.remove(x);
                 return x;
             }
         }
@@ -42,6 +64,27 @@ public class EmployeeRoster {
 
         return false;
     }
+    
+    public int countEmpType(String type){
+        int empCount=0;
+        for(Employee x: Employees){
+            if(isInstance(x, type)){
+                empCount++;
+            }
+        }
+        return empCount;
+    }
+    
+    public void displayEmployeeType(String type){
+        ArrayList<Employee> searchedList = new ArrayList<>();
+        for(Employee x: Employees){
+            if(isInstance(x, type)){
+                searchedList.add(x);
+            }
+        }
+        
+        this.displayAllEmployees(searchedList);
+    }
 
     public void searchEmployee(String keyword) {
         ArrayList<Employee> searchedList = new ArrayList<>();
@@ -57,26 +100,7 @@ public class EmployeeRoster {
     }
 
     public void displayAllEmployees() {
-        if (Employees.isEmpty()) {
-            System.out.println("Employee Roster is Empty!\n");
-            return;
-        }
-        this.printLine();
-        System.out.println(String.format(strFormat,
-                "ID", "Name", "Type", "Salary"));
-        this.printLine();
-        for (Employee x : Employees) {
-
-            if (x != null) {
-                System.out.println(String.format(strFormat,
-                        "" + x.getEmpID(),
-                        x.getEmpName().toString(),
-                        x.getClass().getSimpleName(),
-                        x.computeSalary()));
-            }
-        }
-        this.printLine();
-        System.out.println("");
+        this.displayAllEmployees(Employees);
     }
 
     public void displayAllEmployees(ArrayList<Employee> EmpArr) {

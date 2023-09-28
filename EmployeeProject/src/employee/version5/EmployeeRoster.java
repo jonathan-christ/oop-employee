@@ -1,4 +1,5 @@
 package employee.version5;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -17,6 +18,10 @@ public class EmployeeRoster {
         return Employees;
     }
 
+    public String getStrFormat() {
+        return strFormat;
+    }
+
     //METHODS
     public void addEmployee(Employee... input) {
         Employees.addAll(Arrays.asList(input));
@@ -25,6 +30,7 @@ public class EmployeeRoster {
     public Employee removeEmployee(int id) {
         for (Employee x : Employees) {
             if (x != null && x.getEmpID() == id) {
+                Employees.remove(x);
                 return x;
             }
         }
@@ -41,55 +47,80 @@ public class EmployeeRoster {
 
         return false;
     }
-    
-    private double getSalary(Employee x){
+
+    public int countEmpType(String type) {
+        int empCount = 0;
+        for (Employee y : Employees) {
+            if (isInstance(y, type)) {
+                empCount++;
+            }
+        }
+        return empCount;
+    }
+
+    public void displayEmployeeType(String type) {
+        int length = this.countEmpType(type);
+        if (length == 0) {
+            return;
+        }
+        ArrayList<Employee> searchArr = new ArrayList<>();
+        System.out.println("Displaying Employees of Type " + type.toUpperCase());
+        for (Employee x : Employees) {
+            if (isInstance(x, type)) {
+                searchArr.add(x);
+            }
+        }
+        this.displayAllEmployees(searchArr);
+    }
+
+    private boolean isInstance(Employee y, String type) {
+        boolean ret = false;
+        type = type.toUpperCase();
+        switch (type) {
+            case "HE":
+                ret = (y instanceof HourlyEmployee);
+            case "PW":
+                ret = (y instanceof PieceWorkerEmployee);
+            case "CE":
+                ret = (y instanceof CommissionEmployee);
+            case "BPC":
+                ret = (y instanceof BasePlusCommissionEmployee);
+        }
+
+        return ret;
+    }
+
+    private double getSalary(Employee x) {
         double salary;
         switch (x) {
-            case HourlyEmployee he -> salary = he.computeSalary();
-            case PieceWorkerEmployee pwe -> salary = pwe.computeSalary();
-            case CommissionEmployee ce -> salary = ce.computeSalary();
-            default -> salary = 0;
+            case HourlyEmployee he ->
+                salary = he.computeSalary();
+            case PieceWorkerEmployee pwe ->
+                salary = pwe.computeSalary();
+            case CommissionEmployee ce ->
+                salary = ce.computeSalary();
+            default ->
+                salary = 0;
         }
-        
+
         return salary;
     }
 
     public void searchEmployee(String keyword) {
         ArrayList<Employee> searchedList = new ArrayList<>();
-        
+
         for (Employee x : Employees) {
             if (x.getEmpName().toString().toLowerCase().contains(keyword.toLowerCase())) {
                 searchedList.add(x);
             }
         }
-        
-        System.out.println("Matches that contain keyword: `"+keyword+"`");
+
+        System.out.println("Matches that contain keyword: `" + keyword + "`");
         displayAllEmployees(searchedList);
     }
 
     public void displayAllEmployees() {
-        double salary;
-        if (Employees.isEmpty()) {
-            System.out.println("Employee Roster is Empty!\n");
-            return;
-        }
-        this.printLine();
-        System.out.println(String.format(strFormat,
-                "ID", "Name", "Type", "Salary"));
-        this.printLine();
-        for (Employee x : Employees) {
-            salary = getSalary(x);
-            
-            if (x != null) {
-                System.out.println(String.format(strFormat,
-                        "" + x.getEmpID(),
-                        x.getEmpName().toString(),
-                        x.getClass().getSimpleName(),
-                        salary));
-            }
-        }
-        this.printLine();
-        System.out.println("");
+        this.displayAllEmployees(Employees);
     }
 
     public void displayAllEmployees(ArrayList<Employee> EmpArr) {
