@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package employee.version4;
+package employee.version6;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author User
  */
-public class Employee {
+public abstract class Employee {
 
     private int empID;
     private Name empName;
@@ -127,10 +127,12 @@ public class Employee {
     }
 
 //    USER-DEFINED FUNCTIONS
-    public void displayInfo() {
-        System.out.print(this.toString());
-    }
+    public abstract double computeSalary();
     
+    public void displayInfo() {
+        System.out.println(this.toString());
+    }
+
     @Override
     public String toString() {
         SimpleDateFormat hire = new SimpleDateFormat("MM/dd/yyyy");
@@ -139,7 +141,7 @@ public class Employee {
         SimpleDateFormat bday = new SimpleDateFormat("MM/dd/yyyy");
         String sBday = bday.format(this.empBirthDate);
 
-        return  this.getClass().getSimpleName()+" Instance{\n\tempID=" + empID + ",\n\tempName=" + empName
+        return this.getClass().getSimpleName()+" Instance{\n\tempID=" + empID + ",\n\tempName=" + empName
                 + ",\n\tempDateHired=" + sHire + ",\n\tempBirthDate="
                 + sBday;
     }

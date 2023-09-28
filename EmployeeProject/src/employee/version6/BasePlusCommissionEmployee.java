@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package employee.version4;
-
-import java.text.SimpleDateFormat;
+package employee.version6;
 import java.util.Date;
 
 /**
@@ -94,12 +92,13 @@ public class BasePlusCommissionEmployee extends CommissionEmployee {
 
     @Override
     public void displayInfo() {
-        System.out.println(this.toString() + ",\n\tsalary=" + this.computeSalary() + "\n}\n");
+        String temp = this.toString().replace("\n}\n", ",\n\tsalary=" + this.computeSalary() + "\n}\n"); 
+        System.out.println(temp);
     }
 
     @Override
     public String toString() {
         String temp = super.toString();
-        return temp.replace("\n}\n", ",\n\tbaseSalary=" + baseSalary);
+        return temp.replace("\n}\n", ",\n\tbaseSalary=" + baseSalary + "\n}\n");
     }
 }

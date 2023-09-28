@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package employee.version4;
-
+package employee.version5;
 import java.util.Date;
 
 /**
@@ -122,7 +121,7 @@ public class HourlyEmployee extends Employee {
 //  OVERRIDE FUNCTIONS  
     @Override
     public void displayInfo() {
-        String temp = this.toString().replace("\n}\n", ",\n\tsalary=" + this.computeSalary() + "\n}\n");
+        String temp = this.toString().replace("\n}\n", ",\n\tsalary=" + this.computeSalary() + "\n}\n"); 
         System.out.println(temp);
     }
 

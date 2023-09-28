@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package employee.version4;
-
+package employee.version6;
 import java.util.Date;
 
 /**
@@ -80,6 +79,7 @@ public class CommissionEmployee extends Employee {
     }
 
 //  USER-DEFINED METHODS
+    @Override
     public double computeSalary() {
         final double[] salesPercent = {0.05, 0.2, 0.3, 0.5};
         double salary;

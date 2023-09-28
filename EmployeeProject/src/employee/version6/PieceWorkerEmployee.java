@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package employee.version4;
-
+package employee.version6;
 import java.util.Date;
 
 /**
@@ -97,6 +96,7 @@ public class PieceWorkerEmployee extends Employee {
     }
 
 // USER-DEFINED FUNCTIONS
+    @Override
     public double computeSalary() {
         final int piecesForBonus = 100;
 

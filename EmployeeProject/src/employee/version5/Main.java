@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package employee.version4;
+package employee.version5;
 
 /**
  *
@@ -30,7 +30,7 @@ public class Main {
         er.displayAllEmployees();
         er.searchEmployee("Middle");
         er.updateEmployee(3, new Name("Rey Laurence", "Gikapoy", "Middle"));
-        er.searchEmployee("gikapoy");
+        er.searchEmployee("nothing");
         er.displayAllEmployees();
     }
 }

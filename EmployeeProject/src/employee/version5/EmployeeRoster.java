@@ -1,52 +1,33 @@
-package employee.version4;
+package employee.version5;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EmployeeRoster {
 
-    private Employee[] Employees;
-    private int count;
-    private int max = 10;
+    private final ArrayList<Employee> Employees;
     private final String strFormat = "| %-6s | %-50s | %-50s | %-10s |";
 
     //CONSTRUCTOR
     public EmployeeRoster() {
-        Employees = new Employee[max];
-        count = 0;
-    }
-
-    public EmployeeRoster(int max) {
-        this();
-        this.max = max;
+        Employees = new ArrayList<>();
     }
 
     //ACCESSORS (NO MUTATORS)
-    public Employee[] getEmployees() {
+    public ArrayList<Employee> getEmployees() {
         return Employees;
-    }
-
-    public int getCount() {
-        return count;
     }
 
     //METHODS
     public void addEmployee(Employee... input) {
-        for (Employee e : input) {
-            //CHECK IF ID IS THERE ALREADY
-            Employees[count] = e;
-            count++;
-        }
+        Employees.addAll(Arrays.asList(input));
     }
 
     public Employee removeEmployee(int id) {
-        for (int x = 0; x < count; x++) {
-            if (id == Employees[x].getEmpID()) {
-                this.count--;
-                for (int y = x; y < count; y++) {
-                    Employees[y] = Employees[y + 1];
-                }
-                x--;
+        for (Employee x : Employees) {
+            if (x != null && x.getEmpID() == id) {
+                return x;
             }
         }
-
         return null;
     }
 
@@ -74,33 +55,29 @@ public class EmployeeRoster {
     }
 
     public void searchEmployee(String keyword) {
-        Employee[] searchedArr = new Employee[this.count];
-        int arrIdx;
+        ArrayList<Employee> searchedList = new ArrayList<>();
         
-        arrIdx = 0;
-
-        for (int i = 0; i < count; i++) {
-            Employee x = Employees[i];
+        for (Employee x : Employees) {
             if (x.getEmpName().toString().toLowerCase().contains(keyword.toLowerCase())) {
-                searchedArr[arrIdx++] = x;
+                searchedList.add(x);
             }
         }
+        
         System.out.println("Matches that contain keyword: `"+keyword+"`");
-        displayAllEmployees(searchedArr);
+        displayAllEmployees(searchedList);
     }
 
     public void displayAllEmployees() {
         double salary;
-        if (count == 0) {
+        if (Employees.isEmpty()) {
             System.out.println("Employee Roster is Empty!\n");
             return;
         }
+        this.printLine();
         System.out.println(String.format(strFormat,
                 "ID", "Name", "Type", "Salary"));
-        System.out.println(String.format(strFormat,
-                "", "", "", "", ""));
-        for (int i = 0; i < count; i++) {
-            Employee x = Employees[i];
+        this.printLine();
+        for (Employee x : Employees) {
             salary = getSalary(x);
             
             if (x != null) {
@@ -111,13 +88,20 @@ public class EmployeeRoster {
                         salary));
             }
         }
+        this.printLine();
         System.out.println("");
     }
 
-    public void displayAllEmployees(Employee[] EmpArr) {
+    public void displayAllEmployees(ArrayList<Employee> EmpArr) {
         double salary;
+        if (EmpArr.isEmpty()) {
+            System.out.println("Employee Roster is Empty!\n");
+            return;
+        }
+        this.printLine();
         System.out.println(String.format(strFormat,
                 "ID", "Name", "Type", "Salary"));
+        this.printLine();
         for (Employee x : EmpArr) {
             if (x != null) {
                 salary = getSalary(x);
@@ -128,7 +112,13 @@ public class EmployeeRoster {
                         salary));
             }
         }
+        this.printLine();
         System.out.println("");
     }
 
+    private void printLine() {
+        System.out.print(String.format("%-63s%-64s\n",
+                " -------------------------------------------------------------",
+                "-----------------------------------------------------------------"));
+    }
 }
