@@ -118,11 +118,9 @@ public class EmployeeRoster {
         return salary;
     }
 
-    public void searchEmployee(String keyword) {
+    public Employee[] searchEmployee(String keyword) {
         Employee[] searchedArr = new Employee[this.count];
-        int arrIdx;
-
-        arrIdx = 0;
+        int arrIdx = 0;
 
         for (int i = 0; i < count; i++) {
             Employee x = Employees[i];
@@ -132,6 +130,7 @@ public class EmployeeRoster {
         }
         System.out.println("Matches that contain keyword: `" + keyword + "`");
         displayAllEmployees(searchedArr, arrIdx);
+        return searchedArr;
     }
 
     public void displayAllEmployees() {

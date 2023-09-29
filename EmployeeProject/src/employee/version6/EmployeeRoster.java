@@ -84,7 +84,7 @@ public class EmployeeRoster {
         this.displayAllEmployees(searchedList);
     }
 
-    public void searchEmployee(String keyword) {
+    public ArrayList<Employee> searchEmployee(String keyword) {
         ArrayList<Employee> searchedList = new ArrayList<>();
 
         for (Employee x : Employees) {
@@ -95,6 +95,7 @@ public class EmployeeRoster {
 
         System.out.println("Matches that contain keyword: `" + keyword + "`");
         displayAllEmployees(searchedList);
+        return searchedList;
     }
 
     public void displayAllEmployees() {
