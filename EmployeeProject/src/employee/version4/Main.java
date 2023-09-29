@@ -26,7 +26,7 @@ public class Main {
 
         er.addEmployee(bpc, hourly, piece, comm);
         er.displayAllEmployees();
-        er.removeEmployee(0);
+        System.out.println("Removed: " + er.removeEmployee(0));
         er.displayAllEmployees();
         er.searchEmployee("Middle");
         er.updateEmployee(3, new Name("Rey Laurence", "Gikapoy", "Middle"));

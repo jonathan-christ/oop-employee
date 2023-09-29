@@ -37,17 +37,18 @@ public class EmployeeRoster {
     }
 
     public Employee removeEmployee(int id) {
+;        Employee removed = null;
         for (int x = 0; x < count; x++) {
             if (id == Employees[x].getEmpID()) {
                 this.count--;
+                removed = Employees[x];
                 for (int y = x; y < count; y++) {
                     Employees[y] = Employees[y + 1];
                 }
-                x--;
             }
         }
 
-        return null;
+        return removed;
     }
 
     public boolean updateEmployee(int id, Name name) {
