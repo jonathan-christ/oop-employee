@@ -23,20 +23,25 @@ public class EmployeeRoster {
     }
 
     //METHODS
-        private boolean isInstance(Employee y, String type) {
+    private boolean isInstance(Employee y, String type) {
         boolean ret;
         type = type.toUpperCase();
         switch (type) {
-            case "HE" -> ret = (y instanceof HourlyEmployee);
-            case "PW" -> ret = (y instanceof PieceWorkerEmployee);
-            case "CE" -> ret = (y instanceof CommissionEmployee);
-            case "BPC" -> ret = (y instanceof BasePlusCommissionEmployee);
-            default -> ret = false;
+            case "HE" ->
+                ret = (y instanceof HourlyEmployee);
+            case "PW" ->
+                ret = (y instanceof PieceWorkerEmployee);
+            case "CE" ->
+                ret = (y instanceof CommissionEmployee);
+            case "BPC" ->
+                ret = (y instanceof BasePlusCommissionEmployee);
+            default ->
+                ret = false;
         }
 
         return ret;
     }
-    
+
     public void addEmployee(Employee... input) {
         Employees.addAll(Arrays.asList(input));
     }
@@ -61,41 +66,41 @@ public class EmployeeRoster {
 
         return false;
     }
-    
-    public int countEmpType(String type){
-        int empCount=0;
-        for(Employee x: Employees){
-            if(isInstance(x, type)){
+
+    public int countEmpType(String type) {
+        int empCount = 0;
+        for (Employee x : Employees) {
+            if (isInstance(x, type)) {
                 empCount++;
             }
         }
         return empCount;
     }
-    
-    public void displayEmployeeType(String type){
+
+    public void displayEmployeeType(String type) {
         ArrayList<Employee> searchedList = new ArrayList<>();
         System.out.println("Displaying Employees of Type " + type.toUpperCase());
-        for(Employee x: Employees){
-            if(isInstance(x, type)){
+        for (Employee x : Employees) {
+            if (isInstance(x, type)) {
                 searchedList.add(x);
             }
         }
-        
+
         this.displayAllEmployees(searchedList);
     }
 
-    public ArrayList<Employee> searchEmployee(String keyword) {
-        ArrayList<Employee> searchedList = new ArrayList<>();
+    public EmployeeRoster searchEmployee(String keyword) {
+        EmployeeRoster searchedRoster = new EmployeeRoster();
 
         for (Employee x : Employees) {
             if (x.getEmpName().toString().toLowerCase().contains(keyword.toLowerCase())) {
-                searchedList.add(x);
+                searchedRoster.addEmployee(x);
             }
         }
 
         System.out.println("Matches that contain keyword: `" + keyword + "`");
-        displayAllEmployees(searchedList);
-        return searchedList;
+        displayAllEmployees(searchedRoster.getEmployees());
+        return searchedRoster;
     }
 
     public void displayAllEmployees() {

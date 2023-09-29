@@ -37,7 +37,7 @@ public class EmployeeRoster {
     }
 
     public Employee removeEmployee(int id) {
-;        Employee removed = null;
+        Employee removed = null;
         for (int x = 0; x < count; x++) {
             if (id == Employees[x].getEmpID()) {
                 this.count--;
@@ -93,11 +93,16 @@ public class EmployeeRoster {
         boolean ret;
         type = type.toUpperCase();
         switch (type) {
-            case "HE" -> ret = (y instanceof HourlyEmployee);
-            case "PW" -> ret = (y instanceof PieceWorkerEmployee);
-            case "CE" -> ret = (y instanceof CommissionEmployee);
-            case "BPC" -> ret = (y instanceof BasePlusCommissionEmployee);
-            default -> ret = false;
+            case "HE" ->
+                ret = (y instanceof HourlyEmployee);
+            case "PW" ->
+                ret = (y instanceof PieceWorkerEmployee);
+            case "CE" ->
+                ret = (y instanceof CommissionEmployee);
+            case "BPC" ->
+                ret = (y instanceof BasePlusCommissionEmployee);
+            default ->
+                ret = false;
         }
 
         return ret;
@@ -119,19 +124,18 @@ public class EmployeeRoster {
         return salary;
     }
 
-    public Employee[] searchEmployee(String keyword) {
-        Employee[] searchedArr = new Employee[this.count];
-        int arrIdx = 0;
+    public EmployeeRoster searchEmployee(String keyword) {
+        EmployeeRoster searchedRoster = new EmployeeRoster(this.count);
 
         for (int i = 0; i < count; i++) {
             Employee x = Employees[i];
             if (x.getEmpName().toString().toLowerCase().contains(keyword.toLowerCase())) {
-                searchedArr[arrIdx++] = x;
+                searchedRoster.addEmployee(x);
             }
         }
         System.out.println("Matches that contain keyword: `" + keyword + "`");
-        displayAllEmployees(searchedArr, arrIdx);
-        return searchedArr;
+        displayAllEmployees(searchedRoster.getEmployees(), searchedRoster.count);
+        return searchedRoster;
     }
 
     public void displayAllEmployees() {

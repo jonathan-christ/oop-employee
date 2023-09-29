@@ -77,11 +77,16 @@ public class EmployeeRoster {
         boolean ret;
         type = type.toUpperCase();
         switch (type) {
-            case "HE" -> ret = (y instanceof HourlyEmployee);
-            case "PW" -> ret = (y instanceof PieceWorkerEmployee);
-            case "CE" -> ret = (y instanceof CommissionEmployee);
-            case "BPC" -> ret = (y instanceof BasePlusCommissionEmployee);
-            default -> ret = false;
+            case "HE" ->
+                ret = (y instanceof HourlyEmployee);
+            case "PW" ->
+                ret = (y instanceof PieceWorkerEmployee);
+            case "CE" ->
+                ret = (y instanceof CommissionEmployee);
+            case "BPC" ->
+                ret = (y instanceof BasePlusCommissionEmployee);
+            default ->
+                ret = false;
         }
 
         return ret;
@@ -103,18 +108,18 @@ public class EmployeeRoster {
         return salary;
     }
 
-    public ArrayList<Employee> searchEmployee(String keyword) {
-        ArrayList<Employee> searchedList = new ArrayList<>();
+    public EmployeeRoster searchEmployee(String keyword) {
+        EmployeeRoster searchedRoster = new EmployeeRoster();
 
         for (Employee x : Employees) {
             if (x.getEmpName().toString().toLowerCase().contains(keyword.toLowerCase())) {
-                searchedList.add(x);
+                searchedRoster.addEmployee(x);
             }
         }
 
         System.out.println("Matches that contain keyword: `" + keyword + "`");
-        displayAllEmployees(searchedList);
-        return searchedList;
+        displayAllEmployees(searchedRoster.getEmployees());
+        return searchedRoster;
     }
 
     public void displayAllEmployees() {
